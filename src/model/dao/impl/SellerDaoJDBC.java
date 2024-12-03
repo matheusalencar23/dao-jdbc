@@ -74,18 +74,7 @@ public class SellerDaoJDBC implements SellerDao {
 			st.setInt(5, obj.getDepartment().getId());
 			st.setInt(6, obj.getId());
 
-			int rowsAffected = st.executeUpdate();
-
-			if (rowsAffected > 0) {
-				ResultSet rs = st.getGeneratedKeys();
-
-				if (rs.next()) {
-					int id = rs.getInt(1);
-					obj.setId(id);
-				}
-
-				DB.closeResultSet(rs);
-			}
+			st.executeUpdate();
 		} catch (SQLException e) {
 			throw new DbException(e.getMessage());
 		} finally {
